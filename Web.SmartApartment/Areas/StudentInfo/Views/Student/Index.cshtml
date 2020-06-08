@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Test SmartApartment Data API with Auth0";
+}
+
+<h2>Test SmartApartment Data API with Auth0</h2>
+
+
+<li><a href="~/StudentInfo/Student/GetAllValues">Get All Values</a><span> (Required read:students permission)</span></li>
+<li><a href="~/StudentInfo/Student/GetById">Get By Id</a><span> (Required read:student permission)</span></li>
+<li><a href="~/StudentInfo/Student/CreateObject">Create New Entry</a><span> (Required  create:student permission)</span></li>
+<br />
+<hr />
+@if (ViewBag.StatusCode != "")
+{
+    if (ViewBag.StatusCode == "OK")
+    {
+        <div class="bs-example" data-example-id="alerts-with-links">
+            <div class="alert alert-success" role="alert">
+                <strong>Status Code=</strong> @ViewBag.StatusCode<br /><br />
+                <p>@ViewBag.Data</p>.
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="bs-example" data-example-id="alerts-with-links">
+            <div class="alert alert-danger" role="alert">
+                <strong>Status Code=</strong> @ViewBag.StatusCode<br /><br />
+                <p>@ViewBag.Data</p>.
+            </div>
+        </div>
+
+    }
+}

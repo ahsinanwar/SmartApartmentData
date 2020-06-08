@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API.SmartApartment</name>
+    </assembly>
+    <members>
+        <member name="T:API.SmartApartment.Areas.Student.Controllers.StudentAPIController">
+            Autehticate and Authorize for third party developer with OAuth2.0 and do not need credentials
+            Add user Roles instead of permission, because roles have permission and it is much convenient to use roles instead of permissions.
+        </member>
+        <member name="M:API.SmartApartment.Areas.Student.Controllers.StudentAPIController.#ctor(API.SmartApartment.Services.Interface.ICRUDService{API.SmartApartment.DataObjects.DtoStudent})">
+            <summary>
+            This is the constructor of API Controller and responsible for dependencies of this api controller class
+            </summary>
+            <param name="_studentCRUDService">This is instance of Student service</param>
+            <remarks></remarks>
+        </member>
+        <member name="M:API.SmartApartment.Areas.Student.Controllers.StudentAPIController.Get">
+            <summary>
+            This function gets all DTOStudents into a List which is converted into json
+            </summary>
+            <returns>It returns list of dtoStudent data in json</returns>
+            <remarks>Api request needs read:students permission to authorize</remarks>
+        </member>
+        <member name="M:API.SmartApartment.Areas.Student.Controllers.StudentAPIController.Get(System.Int32)">
+            <summary>
+            This function get single student based on its primary or unique key
+            </summary>
+            <param name="id">id is primary and unique Key of student which information needs to be extracted from database</param>
+            <returns>It returns a single student information data in json</returns>
+            <remarks>Api request needs read:student permission to authorize. If id is less than 0 then we send BadRequest as response and if 
+            no object found by service than we send ArgumentException with no student found message</remarks>
+        </member>
+        <member name="M:API.SmartApartment.Areas.Student.Controllers.StudentAPIController.Post(API.SmartApartment.DataObjects.DtoStudent)">
+            <summary>
+            This function create DTOStudent objects into database
+            </summary>
+            <param name="_dtoStudent"></param>
+            <returns>It returns that new created student</returns>
+            <remarks>Api request needs write:student permission to authorize. If Model is not valid than we send Badrequest as reponse.</remarks>
+        </member>
+        <member name="T:API.SmartApartment.Areas.Student.Data.DtoStudentsData">
+            <summary>
+            This is DTOStudentData class
+            </summary>
+            <remarks>This class bootstrap data into DTOSudent</remarks>
+        </member>
+        <member name="M:API.SmartApartment.Areas.Student.Data.DtoStudentsData.BootstrapStudentDatabase(System.Collections.Generic.List{API.SmartApartment.DataObjects.DtoStudent})">
+            <summary>
+            This function add DTO Student objects into DTOStudent List
+            </summary>
+            <param name="StudentsDatabase">empty list of DtoStudent</param>
+            <returns>It returns a list of students from pre loaded student data</returns>
+            <remarks></remarks>
+        </member>
+        <member name="T:API.SmartApartment.DataObjects.DtoStudent">
+            <summary>
+            This is Student datamodel class
+            </summary>
+            <remarks>It contains all information about student</remarks>
+        </member>
+        <member name="T:API.SmartApartment.Controllers.APIBaseController">
+            <summary>
+            This is API Base Controller
+            All API Controllers will extend this class
+            </summary>
+            <remarks>This class contains the generic functions which are used by Get,Put,Post and Delete actions in api controller.</remarks>
+        </member>
+        <member name="M:API.SmartApartment.Controllers.APIBaseController.ConvertJsonToModel``1(System.String)">
+            <typeparam name="T">T is ViewModel that will convert Json which is received with request</typeparam>
+            <param name="json">it is json </param>
+        </member>
+        <member name="T:API.SmartApartment.Helper.HasScopeHandler">
+            <summary>
+            This is ScopeHandler class
+            </summary>
+            <remarks>This class verifies scopes, roles and permissions to access rest api</remarks>
+        </member>
+        <member name="M:API.SmartApartment.Helper.HasScopeHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,API.SmartApartment.ViewModel.VMScopeRequirement)">
+            <summary>
+            This fucntion perform the Authorization of User
+            </summary>
+            <param name="context"></param>
+            <param name="requirement"></param>
+            <returns></returns>
+            <remarks>This function checks if the permissions claim issued by your Auth0 tenant is present. If the permission claim exists then it will successed the requirement</remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:API.SmartApartment.Services.Implementation.StudentService" -->
+        <member name="M:API.SmartApartment.Services.Implementation.StudentService.#ctor">
+            <summary>
+            This is the constructor of this class, if we use any other service or repository then we must add its dependency
+            </summary>
+        </member>
+        <member name="M:API.SmartApartment.Services.Implementation.StudentService.GetAllItems">
+            <summary>
+            This function extracted a list of 
+            </summary>
+            <returns>It returns a list of DoStudents datamodel</returns>
+        </member>
+        <member name="M:API.SmartApartment.Services.Implementation.StudentService.GetSingleItem(System.Int32)">
+            <summary>
+            This function return DtoStudent datamodel agains student id
+            </summary>
+            <param name="_id">id is primary and unique Key of student which information needs to be extracted from database</param>
+            <returns>It returns a single student information data in json</returns>
+        </member>
+        <member name="M:API.SmartApartment.Services.Implementation.StudentService.AddItem(API.SmartApartment.DataObjects.DtoStudent)">
+            <summary>
+            This function add DTOStudent object into database
+            </summary>
+            <param name="_dtoStudent">Datamodel DtoStudent which is new student informaion profile which needs to be created into the system</param>
+            <returns>It returns datamodel DTOStudent which is newly created aginst provided DtoStudent object</returns>
+        </member>
+        <member name="T:API.SmartApartment.Services.Interface.ICRUDService`1">
+            <summary>
+            This is an generic interface for CRUD operation for any datamodel where Dto is datamodel
+            </summary>
+            <remarks>It contains defination for those functions which are required for CRUD operations for every database table. 
+            All those services which needs generic CRUD operation they can implement this interface</remarks>
+        </member>
+        <member name="M:API.SmartApartment.Services.Interface.ICRUDService`1.GetAllItems">
+            Extract datamodel DtoStudent based on below criteria
+            -->Pagination
+            -->search citeria
+        </member>
+        <member name="M:API.SmartApartment.Services.Interface.ICRUDService`1.GetSingleItem(System.Int32)">
+            <summary>
+            This function return datamodel against provided primary or unique key
+            </summary>
+            <param name="_id">id is primary or unique Key of datamodel</param>
+            <returns>It returns a single datamodel object</returns>
+        </member>
+        <member name="M:API.SmartApartment.Services.Interface.ICRUDService`1.AddItem(`0)">
+            <summary>
+            This function add DTOStudent object into database
+            </summary>
+            <param name="_dtoEntity">This is datamodel object which is created in database</param>
+            <returns>Returns new created datamodel object</returns>
+        </member>
+        <member name="T:API.SmartApartment.Startup">
+            <summary>
+            This is a Startup class 
+            </summary>
+            <remarks>It is the entry point of the application. It configures the request pipeline which handles all requests made to the .net core 
+            application. If we use any third party package in our application, we need to configure in this class. e.g In this application we handled 
+            our authentication and authorization by Auth0.</remarks>
+        </member>
+        <member name="M:API.SmartApartment.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            This is the constructor of this class
+            </summary>
+            <param name="configuration">this is key and value of configuration properties for this application e.g we can access properties 
+            which are defined in appsetting.json file by this interface</param>
+        </member>
+        <member name="M:API.SmartApartment.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This function configures all services which your application need
+            </summary>
+            <param name="services">servies descriptors</param>
+            <remarks>We have configured below services:
+            -->Call AddAuthentication method with JWT Bearer tokens as the default authentication and challenge schemes.
+            -->Use AddJwtBearer method to Configure your Auth0 domain as the authority, and your Auth0 API identifier as the audience which you have created in Auth0
+            -->Call AddAuthorization method to add permissions in requirement of policies you created to access rest api requests
+            --> Configure developer designed services for dependencies handling
+            </remarks>
+        </member>
+        <member name="M:API.SmartApartment.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This function execute at runtime of the application
+            </summary>
+            <param name="app">This is application builder interface which configue application pipeline</param>
+            <param name="env">This is interface provides web hosting environment</param>
+            <remarks>This method gets called by the runtime. Use this method to configure the HTTP request pipeline. We configure items for development or production environment</remarks>
+        </member>
+        <member name="T:API.SmartApartment.ViewModel.VMScopeRequirement">
+            <summary>
+            This is a viewModel for Scope Requirement
+            </summary>
+            <remarks>This class contains the preoperties to verify JWT claims for every API request</remarks>
+        </member>
+        <member name="M:API.SmartApartment.ViewModel.VMScopeRequirement.#ctor(System.String,System.String)">
+            <summary>
+            This is constructor of the viewmodel VMScopeRequirement
+            </summary>
+            <param name="scope">scope contains permission</param>
+            <param name="issuer">issuer contains audience from Auth0 JWT token</param>
+        </member>
+    </members>
+</doc>

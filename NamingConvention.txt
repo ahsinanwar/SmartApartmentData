@@ -1,0 +1,18 @@
+﻿
+There are two types of model in this applicaion, one is DataModel and other is ViewModel
+Datamodel are those objects which contains the properties of a table
+Viewmodel are those objects which contains those preoperties which are required to perform logical and business 
+operation
+
+**************CLASS NAME***********************
+
+Datamodel class name must start with prefix "Dto"+Noun in PascalCase e.g DtoStudent
+Viewmodel class name must has prefix "VM"+Noun in PascalCase e.g VMStudent
+Service class name must has suffix "Service"
+API Controller name start with prefix API+Noun+Controller e.g APIStudentController
+Controller name must has suffix Nount+Controller e.g StudentController
+Helper class must has suffix Helper Noun(PascalCase)+Helper
+
+************VARIABLE NAME*********
+Class variables must be in Camelcase e.g student
+Function variable must has prefix "_"+Nounn
